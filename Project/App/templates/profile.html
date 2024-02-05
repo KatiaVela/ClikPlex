@@ -1,0 +1,55 @@
+{% extends 'base/index.html' %}
+{% load static %}
+
+{% block content %}
+<section class="cid-u2aXRc00UE container-fluid">
+    <div class="container">
+        <h2 class="mt-4 mb-4">Profili i Përdoruesit</h2>
+
+        <div class="user-info mb-4">
+            <h3>Te dhenat e perdoruesit:</h3>
+            <p class="lead"><strong>Emri:</strong> {{ user.first_name }} {{ user.last_name }}</p>
+            <p class="lead"><strong>Username:</strong> {{ user.username }}</p>
+            <p class="lead"><strong>Email:</strong> {{ user.email }}</p>
+        </div>
+
+        <div class="reservations mb-4">
+            <h3>Rezervimet:</h3>
+            {% if reservations %}
+                <div class="table-responsive">
+                    <table class="table table-hover  table-bordered ">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Filmi</th>
+                                <th scope="col">Data</th>
+                                <th scope="col">Ora</th>
+                                <th scope="col">Nr Biletave</th>
+                                <th scope="col">Cmimi</th>
+                                <th scope="col">Cmimi Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for reservation in reservations %}
+                                <tr>
+                                    <td>{{ reservation.showing.movie.title }}</td>
+                                    <td>{{ reservation.showing.date }}</td>
+                                    <td>{{ reservation.showing.time }}</td>
+                                    <td>{{ reservation.number_of_tickets }}</td>
+                                    <td>{{ reservation.showing.ticket_price }}</td>
+                                    <td>{{ reservation.total_price }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            
+            {% else %}
+                <p class="lead">Nuk ka rezervime.</p>
+            {% endif %}
+        </div>
+
+        <a href="{% url 'movie_list' %}" class="btn btn-danger rounded-5">Kthehu tek lista e filmave</a>
+    </div>
+</section>
+
+{% endblock %}

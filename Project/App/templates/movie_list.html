@@ -1,0 +1,69 @@
+{% extends 'base/index.html' %}
+{% load static %}
+
+{% block content %}
+<section class="features03 cid-u2aXRc00UE" style="background-color:#232222;">
+    
+    <h1 id="programTitle" class="title h1 text-center py-3" style="color:white;">{{ program_title }}</h1>
+
+
+    <div class="container text-center">
+        <label for="dateFilter" style="color:white;">Zgjidh datën:</label>
+        <input type="date" id="dateFilter" name="dateFilter" value="{{ current_date|date:'Y-m-d' }}" max="{{ max_date|date:'Y-m-d' }}">
+        <button class="btn btn-danger rounded-5" onclick="applyDateFilter()">Filtro</button>
+    </div>
+
+    {% if showings_today %}
+    <div class="card-deck ">
+
+        {% for showing in showings_today %}
+        <div class="container py-2 ">
+            <div class="card mb-2">
+                <div class="row no-gutters border border-danger p-2 mb-2 border-opacity-25" style="background-color:#F2F1EF;">
+                    <div class="col-md-4 justify-content-center">
+                        <img src="{% if showing.movie.poster_image %}{{ showing.movie.poster_image.url }}{% else %}{% static 'path/to/default/poster.jpg' %} {% endif %}" class="card-img img-fluid rounded-0 " alt="{{ showing.movie.title }}" style=" max-width: 300px; height: auto;">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body " >
+                            <h1 class="card-title fs-1 fw-bolder" style="font-family: "Lucida Console", "Courier New", monospace;"><strong><a href="{% url 'movie_detail' showing.movie.id %}" class="text-decoration-none text-dark fs-1 ">{{ showing.movie.title }}</a></strong></h1>
+                            <ul class="list-unstyled " style="font-family: "Lucida Console", "Courier New", monospace;">
+                                <li class="mb-2 fs-3" >{{ showing.cinema.name }}</li>
+                                <li class="mb-2 fs-3"><i style=" text-decoration: underline red;">Salla:</i>{{ showing.hall.hall_number }}</li>
+                                <li class="mb-2 fs-3" ><i style=" text-decoration: underline red;">Salla:</i>{{ showing.date }} {{ showing.time }}</li>
+                                <li class="mb-2 fs-3"><i style=" text-decoration: underline red;">Kohëzgjatja:</i> {{ showing.movie.duration }} min</li>
+                                <li class="mb-2 fs-3"><i style=" text-decoration: underline red;">Kategoritë:</i> 
+                                        {% for category in showing.movie.categories.all %}
+                                            {{ category.category_name }}{% if not forloop.last %}, {% endif %}
+                                        {% endfor %}
+                                </li>
+                            </ul>     
+                            </div>
+                            <a href="{% url 'movie_detail' showing.movie.id %}" class="mt-auto btn btn-primary rounded-5 text-center ">Zbulo Detajet</a>
+                            <a href="{% url 'reserve_ticket' showing.id %}" class="mt-auto btn btn-danger rounded-5 text-center">Rezervo</a>
+
+
+                        </div>
+                 </div>
+            </div>     
+        </div>
+        {% endfor %}
+
+    </div>
+    {% else %}
+    <p style="color:white;" >Nuk ka shfaqje për ditën e sotme.</p>
+    {% endif %}
+
+    <script>
+        function applyDateFilter() {
+            var selectedDate = new Date(document.getElementById("dateFilter").value);
+            window.location.href = "{% url 'movie_list' %}?date=" + selectedDate.toISOString().split('T')[0];
+
+            // Change the title based on the difference in days
+            changeProgramTitle(selectedDate);
+        }
+
+        
+    </script>
+    
+</section>
+{% endblock %}

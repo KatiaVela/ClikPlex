@@ -1,0 +1,42 @@
+{% extends 'base/index.html' %}
+{% load static %}
+
+{% block content %}
+
+
+
+<section class="article9 cid-u2aXRbXWXf" id="about-me-9-u2aXRbXWXf">
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 order-md-1 d-flex justify-content-center align-items-center">
+            <div class="movie-poster">
+                {% if actor.image_actor %}
+                    <img src="{{ actor.image_actor.url }}" alt="{{ actor.name }} Image" class="img-fluid" style="max-width: 300px; height: auto;">
+                {% endif %} </div>
+        </div>
+        
+        <div class="col-md-6 order-md-2">
+            <div class="movie-details">
+                <h1>{{ actor.name }} - Actor Detail</h1>
+                <p>{{ actor.bio}}</p>
+                <p>Movies:</p>
+                {% if actor.movies.all %}
+                <ul class="list-group-numbered">
+                    {% for movie in actor.movies.all %}
+                        <li>
+                            <a href="{% url 'movie_detail' movie.id %}">{{ movie.title }}</a>
+                            - {{ movie.director }}, {{ movie.release_year }}
+                        </li><li>
+                            <a href="{% url 'movie_detail' movie.id %}" class="btn btn-primary btn-movie">View Movie</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No movies found for this actor.</p>
+            {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+{% endblock %}

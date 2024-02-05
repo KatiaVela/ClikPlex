@@ -1,0 +1,49 @@
+
+{% extends 'base/index.html' %}
+{% load static %}
+
+{% block title %}
+   Log in
+{% endblock %}
+
+{% block content %}
+<style>
+    body{
+        background-color:rgb(249, 242, 242);
+    }
+</style>
+<section class="cid-u2aXRc00UE container mt-5" style="background-color:rgb(249, 242, 242);">
+    <div class="row justify-content-center">
+        <div class="col-md-6 text-center">
+            <div class="card ">
+                <div class="card-header bg-danger text-white rounded-5 rounded-bottom">
+                    <h4 class="mb-0">Login</h4>
+                </div>
+                <div class="card-body">
+                    <form method="post" action="{% url 'login' %}" class="needs-validation" novalidate>
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username:</label>
+                            <input type="text" class="form-control rounded-5" id="username" name="username" placeholder="Enter your username" required>
+                            <div class="invalid-feedback">
+                                Please enter your username.
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password:</label>
+                            <input type="password" class="form-control rounded-5" id="password" name="password" placeholder="Enter your password" required>
+                            <div class="invalid-feedback">
+                                Please enter your password.
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <p>If you don't have an account, <a href="{% url 'register' %}" class="text-danger">register here</a></p>
+                        </div>
+                        <button type="submit" class="btn btn-danger btn-block">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

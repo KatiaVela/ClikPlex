@@ -1,0 +1,38 @@
+{% extends 'base/index.html' %}
+{% load static %}
+
+{% block content %}
+<script>
+    function calculateTotal() {
+        var pricePerTicket = {{ showing.ticket_price }};
+        var numTickets = parseInt(document.getElementById('id_number_of_tickets').value);
+        var totalPrice = pricePerTicket * numTickets;
+        document.getElementById('totalPrice').innerText = 'Total Price: ' + totalPrice + ' ALL';
+    }
+</script>
+<section class="features03 cid-u2aXRc00UE">
+    <div class="container mt-4
+    ">
+        <div class="row  border-danger">
+            <div class="col-md-6 p-4">
+                <h2 class="text-danger">Detajet e Rezervimit Tuaj</h2>
+
+                <p><strong class="text-danger">Rezervuar nga:</strong> {{ reservation.user.get_full_name }}</p>
+                <p><strong class="text-danger">Filmi:</strong> {{ reservation.showing.movie.title }}</p>
+                <p><strong class="text-danger">Data e Shfaqjes:</strong> {{ reservation.showing.date }}</p>
+                <p><strong class="text-danger">Ora e Shfaqjes:</strong> {{ reservation.showing.time }}</p>
+            </div>
+            <div class="col-md-6 bg-dark text-white p-4  ">
+                <h2>Detajet e Biletave</h2>
+
+                <p><strong>Numri i Biletave:</strong> {{ reservation.number_of_tickets }}</p>
+                <p><strong>Cmimi Total:</strong> {{ reservation.total_price }} ALL</p>
+                <p><strong>Data e Rezervimit:</strong> {{ reservation.reservation_date }}</p>
+                <p><a href="{% url 'movie_detail' movie_id=reservation.showing.movie.id %}" class="btn btn-light">Kthehu te Filmi</a></p>
+            </div>
+            
+        </div>
+    </div>
+</section>
+{% endblock %}
+

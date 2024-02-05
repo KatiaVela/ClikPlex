@@ -1,0 +1,46 @@
+{% extends 'base/index.html' %}
+{% load static %}
+
+{% block content %}
+<script>
+    function calculateTotal() {
+        var pricePerTicket = {{ showing.ticket_price }};
+        var numTickets = parseInt(document.getElementById('id_number_of_tickets').value);
+        var totalPrice = pricePerTicket * numTickets;
+        document.getElementById('totalPrice').innerText = 'Total Price: ' + totalPrice + ' ALL';
+    }
+</script>
+<section class="cid-u2aXRc00UE container mt-5">
+    {% if user.is_authenticated %}
+        {% if all_tickets_reserved %}
+            <div class="alert alert-danger" role="alert">
+                Te gjitha biletat jane te rezervuara.
+            </div>
+        {% else %}
+            <h2 class="mb-4">Rezervo biletën për shfaqjen e filmimit</h2>
+            <form method="post" action="{% url 'reserve_ticket' showing.id %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="id_number_of_tickets">Numri i Biletave:</label>
+                    <input type="number" class="form-control" name="number_of_tickets" id="id_number_of_tickets" onchange="calculateTotal()" required>
+                </div>
+                <p id="totalPrice" class="mb-3">Total Price: 0 ALL</p>
+                <button type="button" class="btn btn-primary rounded-5" onclick="calculateTotal()">Calculate Total</button>
+                <button type="submit" class="btn btn-danger rounded-5">Rezervo</button>
+            </form>
+
+            {% if showing.reservation_set.all %}
+                <div class="mt-4">
+                    <h3>Numri total i bileta te rezervuara: {{ total_reserved_tickets }}</h3>
+                </div>
+            {% else %}
+                <p>No reservations yet.</p>
+            {% endif %}
+        {% endif %}
+    {% else %}
+        <div class="alert alert-warning" role="alert">
+            Ju lutem kyçuni për të vazhduar. <a href="{% url 'login' %}" class="alert-link">Kyçu</a>
+        </div>
+    {% endif %}
+</section>
+{% endblock %}

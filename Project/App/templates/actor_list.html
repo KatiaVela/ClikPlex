@@ -1,0 +1,11 @@
+{%load static%}
+
+{% include 'base/index.html' %}
+{% block content%}
+<h1>Actor List</h1>
+    <ul>
+        {% for actor in actors %}
+            <li><a href="{% url 'actor_detail' actor.id %}">{{ actor.name }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

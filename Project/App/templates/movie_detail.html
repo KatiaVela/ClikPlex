@@ -1,0 +1,88 @@
+{% extends 'base/index.html' %}
+{% load static %}
+
+{% block content %}
+<section class="article9 cid-u2aXRbXWXf" id="about-me-9-u2aXRbXWXf">
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-md-6 order-md-2">
+                <div class="movie-details">
+                    <h1><strong>{{ movie.title }}</strong></h1>
+                    <p><strong>Director:</strong> {{ movie.director }}</p>
+                    <p><strong>Actors:</strong></p>
+                    <ul class="actor-list">
+                        {% for actor in movie.actors.all %}
+                            <li><a href="{% url 'actor_detail' actor.id %}" class="text-danger" >{{ actor.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                    <p><strong>Përshkrimi:</strong> {{ movie.description }}</p>
+                    <p><strong>Minutazhi Filmit:</strong> {{ movie.duration }} minutes</p>
+                    <p><strong>Shteti ku është prodhuar:</strong> {{ movie.country_of_origin }}</p>
+                    <p><strong>Viti i realizimit:</strong> {{ movie.release_year|date:"Y" }}</p>
+                    <p><strong>Kategoritë:</strong></p>
+                    <ul class="category-list">
+                        {% for category in movie.categories.all %}
+                            <li>{{ category.category_name }}{% if not forloop.last %}, {% endif %}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6 order-md-1 d-flex justify-content-center align-items-center">
+                <div class="movie-poster">
+                    <img src="{{ movie.poster_image.url }}" alt="{{ movie.title }} Image" class="img-fluid" style="max-width: 300px; height: auto;">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+  section {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("{% static 'image/movie.jpg' %}");
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    padding: 50px 0;
+}
+
+    .movie-details {
+        font-family: 'Arial', sans-serif;
+    }
+
+    .movie-details h1 {
+        font-size: 24px;
+        color: #fff;
+        margin-bottom: 20px;
+    }
+
+    .movie-details p {
+        font-size: 16px;
+        color: #fff;
+        margin-bottom: 10px;
+    }
+
+    .actor-list,
+    .category-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .actor-list li,
+    .category-list li {
+        display: inline-block;
+        margin-right: 10px;
+    }
+
+    .movie-poster {
+        background: rgba(255, 255, 255, 0.8);
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    .movie-poster img {
+        width: 100%;
+        height: auto;
+    }
+</style>
+{% endblock %}

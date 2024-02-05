@@ -1,0 +1,284 @@
+
+{% extends 'base/index.html' %}
+{%load static%}
+
+
+{% block content %}
+{% comment %} section kur hapet faqja  {% endcomment %}
+  <section class="header16 cid-u2aXRbX5av mbr-fullscreen mbr-parallax-background" id="hero-17-u2aXRbX5av">
+    <div class="mbr-overlay" style="opacity: 0.3; background-color: rgb(0, 0, 0);"></div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="content-wrap col-12 col-md-10">
+          <h1 class="mbr-section-title mbr-fonts-style mbr-white mb-4 display-1">
+            <strong>Movie Magic</strong>
+          </h1>
+          <p class="mbr-fonts-style mbr-text mbr-white mb-4 display-7">Hapu derën e një bote magjike kinematografike dhe emocionuese. Bëj eksperiencën e filmave më të rinj dhe klasikëve kohor në një dritë krejt të re.</p>
+          <div class="mbr-section-btn "><a class="btn btn-outline-light btn-lg rounded-5" href="{% url 'movie_list' %}" >Get Tickets</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+{% comment %} Filmat me te rinj {% endcomment %}
+<section class="features03 cid-u2aXRc00UE" id="news-1-u2aXRc00UE">
+  <div class="container-fluid">
+    <div class="row justify-content-center mb-5">
+      <div class="col-12 content-head">
+        <div class="mbr-section-head">
+          <h4 class="mbr-section-title mbr-fonts-style align-center mb-0 display-2">
+            <strong>Fimlat me te rinj </strong>
+          </h4>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      {% for movie in recent_movies %}
+      <div class="col-12 col-md-6 col-lg-3 mb-4">
+        <div class="card h-100">
+          <img src="{{ movie.poster_image.url }}" class="card-img-top rounded-5" alt="{{ movie.title }} Poster">
+          <div class="card-body">
+            <h5 class="card-title">
+              <strong><a class="text-black fw-bold" href="{% url 'movie_detail' movie.id %}">{{ movie.title }}</a></strong>
+            </h5>
+            <p class="card-text">{{ movie.release_year.year }}</p>
+            <p class="card-text">{{ movie.description }}</p>
+          </div>
+          <div class="text-center">
+            <a href="{% url 'movie_detail' movie.id %}" class="btn btn-danger btn-sm rounded-5">Read More</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+
+
+{% comment %} sension informues {% endcomment %}
+
+<section class="article07 cid-u2aXRbZPnf mbr-parallax-background" id="generic-text-16-u2aXRbZPnf">
+  <div class="container">
+      <div class="row justify-content-center">
+          <div class="card col-md-12 col-lg-10">
+              <div class="card-wrapper rounded-4">
+                  <h3 class="card-title mbr-fonts-style mbr-white mt-3 mb-4 display-2">
+                      <strong>Shijoni Magjinë</strong>
+                  </h3>
+                  <div class="row card-box align-left">
+                      <div class="item features-without-image col-12">
+                          <div class="item-wrapper">
+                              <p class="mbr-text mbr-fonts-style display-7">
+                                  Në Click Plex, çdo film është një aventurë që pret të zbulohet. Nga aksioni i tensionuar te rrëfimet e ngrohta, ka diçka për çdo person.
+                              </p>
+                          </div>
+                      </div>
+                      <div class="item features-without-image col-12">
+                          <div class="item-wrapper">
+                              <p class="mbr-text mbr-fonts-style display-7">
+                                  Përfshihuni në botën e kinemasë dhe lejoni imagjinatën tuaj të ecë shurdhueshëm. Përgatituni të kapërceheni, tronditeni, dhe lëvizni nga fuqia e tregimit.
+                              </p>
+                          </div>
+                      </div>
+                      <div class="item features-without-image col-12">
+                          <div class="item-wrapper">
+                              <p class="mbr-text mbr-fonts-style display-7">
+                                  Bashkohuni me ne për një përvojë të paharrueshme që do t'ju lërë pa frymë dhe do t'ju bëjë të dëshironi më shumë.
+                              </p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+
+
+  
+{% comment %} audienca {% endcomment %}
+  <section class="features023 cid-u2aXRc0GES" id="metrics-1-u2aXRc0GES">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 content-head">
+                <div class="card-wrapper mb-5">
+                    <div class="card-box align-center">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row content-row">
+            <div class="item features-without-image col-12 col-md-6 col-lg-4 item-mb">
+                <div class="item-wrapper">
+                    <div class="title mb-3">
+                        <span class="num mbr-fonts-style display-1"><strong>100+</strong></span>
+                    </div>
+                    <h4 class="card-title mbr-fonts-style display-5">
+                        <strong>Movies Showing</strong>
+                    </h4>
+                </div>
+            </div>
+            <div class="item features-without-image col-12 col-md-6 col-lg-4 item-mb">
+                <div class="item-wrapper">
+                    <div class="title mb-3">
+                        <span class="num mbr-fonts-style display-1"><strong>1,000,000+</strong></span>
+                    </div>
+                    <h4 class="card-title mbr-fonts-style display-5">
+                        <strong>Happy Moviegoers</strong>
+                    </h4>
+                </div>
+            </div>
+            <div class="item features-without-image col-12 col-md-6 col-lg-4 item-mb">
+                <div class="item-wrapper">
+                    <div class="title mb-3">
+                        <span class="num mbr-fonts-style display-1"><strong>99%</strong></span>
+                    </div>
+                    <h4 class="card-title mbr-fonts-style display-5">
+                        <strong>Customer Satisfaction</strong>
+                    </h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% comment %} senssion rirkujtimi per rezervim biletash {% endcomment %}
+
+<section class="header12 cid-u2aXRc0ypi" id="call-to-action-8-u2aXRc0ypi">
+    <div class="text-center container">
+        <div class="row mb-4 justify-content-center">
+            <div class="col-12 col-md-4">
+                <img src="{% static 'image/cinema.jpg'%}">
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-12 content-head">
+                <h1 class="mbr-section-title mbr-fonts-style mb-4 display-2">
+                    <strong>Vijoni Magjin</strong>
+                </h1>
+                <p class="mbr-text mbr-fonts-style mb-4 display-7">
+                  Hapuni dritaren e një bote magjepsëse dhe emocionuese. Rezervoni bileta tuaja tani!
+                </p>
+                <div class="mbr-section-btn mt-4">
+                    <a class="btn btn-outline-light btn-lg display-7 rounded-5" href="{% url 'movie_list' %}">Merrni Biletat</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="features10 cid-u2aXRc0fMH" id="features-25-u2aXRc0fMH">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="item features-without-image col-12 col-md-6 col-lg-4 active">
+                <div class="item-wrapper">
+                    <div class="card-box align-left">
+                        <h5 class="card-title mbr-fonts-style display-5">
+                            <strong>VIP Access</strong>
+                        </h5>
+                        <p class="card-text mbr-fonts-style mb-3 display-7">
+                          Shijoni avantazhe ekskluzive, vendosje me prioritete dhe kënaqësi luksoze me bileta VIP.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="item features-without-image col-12 col-md-6 col-lg-4">
+                <div class="item-wrapper">
+                    <div class="card-box align-left">
+                        <h5 class="card-title mbr-fonts-style display-5">
+                            <strong>Family Fun</strong>
+                        </h5>
+                        <p class="card-text mbr-fonts-style mb-3 display-7">
+                          Krijoni kujtime të përhershme me shfaqje speciale miqësore për familjen dhe zbritje për fëmijë.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="item features-without-image col-12 col-md-6 col-lg-4">
+                <div class="item-wrapper">
+                    <div class="card-box align-left">
+                        <h5 class="card-title mbr-fonts-style display-5">
+                            <strong>Movie Events</strong>
+                        </h5>
+                        <p class="card-text mbr-fonts-style mb-3 display-7">
+                          Zhyteni në shfaqje speciale, premiera dhe ngjarje interaktive të filmit.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% comment %} kontakt {% endcomment %}
+
+  <section class="contacts01 cid-u2aXRc1mxy" id="contacts-1-u2aXRc1mxy" style="background-color:GhostWhite;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 content-head">
+                <div class="mbr-section-head mb-5">
+                    <h3 class="mbr-section-title mbr-fonts-style align-center mb-0 display-2">
+                        <strong>Contact Us</strong>
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="item features-without-image col-12 col-md-6 active" >
+                <div class="item-wrapper" style="background-color:white;">
+                    <div class="text-wrapper">
+                        <h6 class="card-title mbr-fonts-style mb-3 display-5">
+                            <strong>Phone</strong>
+                        </h6>
+                        <p class="mbr-text mbr-fonts-style display-7">
+                            <a href="tel:123-456-7890" class="text-black">123-456-7890</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="item features-without-image col-12 col-md-6">
+                <div class="item-wrapper">
+                    <div class="text-wrapper">
+                        <h6 class="card-title mbr-fonts-style mb-3 display-5">
+                            <strong>Email</strong>
+                        </h6>
+                        <p class="mbr-text mbr-fonts-style display-7">
+                            <a href="mailto:info@cinemagic.com" class="text-black">info@clickplex.com</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="item features-without-image col-12 col-md-6">
+                <div class="item-wrapper">
+                    <div class="text-wrapper">
+                        <h6 class="card-title mbr-fonts-style mb-3 display-5">
+                            <strong>Address</strong>
+                        </h6>
+                        <p class="mbr-text mbr-fonts-style display-7">
+                            Tirana Albania
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="item features-without-image col-12 col-md-6">
+                <div class="item-wrapper">
+                    <div class="text-wrapper">
+                        <h6 class="card-title mbr-fonts-style mb-3 display-5">
+                            <strong>Working Hours</strong>
+                        </h6>
+                        <p class="mbr-text mbr-fonts-style display-7">                           
+                          E Hënë - E Dielë: 12am -12pm
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}
