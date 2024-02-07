@@ -18,12 +18,12 @@
 
         {% for showing in showings_today %}
         <div class="container py-2 ">
-            <div class="card mb-2">
+            <div class="card mb-2 ">
                 <div class="row no-gutters border border-danger p-2 mb-2 border-opacity-25" style="background-color:#F2F1EF;">
                     <div class="col-md-4 justify-content-center">
                         <img src="{% if showing.movie.poster_image %}{{ showing.movie.poster_image.url }}{% else %}{% static 'path/to/default/poster.jpg' %} {% endif %}" class="card-img img-fluid rounded-0 " alt="{{ showing.movie.title }}" style=" max-width: 300px; height: auto;">
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-8 pl-4">
                         <div class="card-body " >
                             <h1 class="card-title fs-1 fw-bolder" style="font-family: "Lucida Console", "Courier New", monospace;"><strong><a href="{% url 'movie_detail' showing.movie.id %}" class="text-decoration-none text-dark fs-1 ">{{ showing.movie.title }}</a></strong></h1>
                             <ul class="list-unstyled " style="font-family: "Lucida Console", "Courier New", monospace;">
@@ -57,8 +57,6 @@
         function applyDateFilter() {
             var selectedDate = new Date(document.getElementById("dateFilter").value);
             window.location.href = "{% url 'movie_list' %}?date=" + selectedDate.toISOString().split('T')[0];
-
-            // Change the title based on the difference in days
             changeProgramTitle(selectedDate);
         }
 

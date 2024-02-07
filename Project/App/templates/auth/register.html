@@ -28,7 +28,7 @@
                             </div>
                         {% endfor %}
                     {% endif %}
-                    <form method="POST" action="{% url 'user-login' %}">
+                    <form method="POST" action="{% url 'register' %}">
                         {% csrf_token %}
                         <div class="mb-3">
                             <label for="firstname" class="form-label">First Name:</label>

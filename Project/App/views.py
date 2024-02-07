@@ -45,7 +45,7 @@ def custom_login(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('home')  # Ndryshoni 'home' me emrin e rrugës që dëshironi
+            return redirect('home')  
     return render(request, 'auth/login.html')
 
     
@@ -94,14 +94,12 @@ def register(request):
             and confirm_password == ""
         ):
             messages.error(request, "Fill in all fields.")
-        # Nese password nuk jane te njejta
         elif password != confirm_password:
             messages.error(request, "Passwords do not match.")
-        # Nese user-i ekziston
+      
         elif User.objects.filter(username=username).exists():
             messages.error(request, "Username already exists.")
         else:
-            # Krijimi i user-it te ri
             user = User.objects.create_user(
                 email=email,
                 username=username,
@@ -109,13 +107,10 @@ def register(request):
                 first_name=first_name,
                 last_name=last_name,
             )
-            # Vendosja e sigurise per password
             user.set_password(password)
             user.save()
-            # Pas regjistrimit te userit kalohet tek faqja e login-it
             messages.success(request, "Registration successful. You can now log in.")
             return redirect("../login/")
-    # Renderizimi i html-se dhe kontekstit
     return render(request, "auth/register.html")
 
 def movie_list(request):
@@ -221,7 +216,6 @@ def profile_view(request):
     user = request.user
     reservations = Reservation.objects.filter(user_id=user.id)
     
-    # Përditësojeni llogaritjet për totalin e çmimit
     for reservation in reservations:
         reservation.total_price = reservation.showing.ticket_price * reservation.number_of_tickets
 

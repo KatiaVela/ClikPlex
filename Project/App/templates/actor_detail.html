@@ -9,7 +9,7 @@
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-6 order-md-1 d-flex justify-content-center align-items-center">
-            <div class="movie-poster">
+            <div class="actor-poster">
                 {% if actor.image_actor %}
                     <img src="{{ actor.image_actor.url }}" alt="{{ actor.name }} Image" class="img-fluid" style="max-width: 300px; height: auto;">
                 {% endif %} </div>
@@ -39,4 +39,27 @@
     </div>
 </div>
 </section>
+
+<style>
+    section {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("{% static 'image/img.jpg' %}");
+        background-size: cover;
+        background-position: center;
+        color: #fff;
+        padding: 50px 0;
+    }
+    .actor-poster{
+        background: rgba(255, 255, 255, 0.8);
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+
+    .actor-poster img {
+        width: 100%;
+        height: auto;
+    }
+
+</style>
+
 {% endblock %}

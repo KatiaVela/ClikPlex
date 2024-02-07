@@ -716,7 +716,7 @@
               </button>
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="{% url 'logout' %}">Log out </a></li>
-                <li><a class="dropdown-item" href="{% url 'profile' %}">Welcome,
+                <li><a class="dropdown-item" href="{% url 'profile' %}">Welcome,<br>
                     {{request.user.username}}</a></li>
               </ul>
             </div>
